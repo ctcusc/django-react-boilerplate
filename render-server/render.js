@@ -8,7 +8,13 @@ const routesPath = '../client/routes';
 let routes = require(routesPath).default;
 
 export default (req, res) => {
+  // provide the option to skip ssr completely
   if (isDev) {
+    if (req.query.nossr != null) {
+      console.log('[dev] skipping ssr');
+      res.send(renderPage(''));
+      return;
+    }
     console.log('[dev] hot-reloading routes');
     // clear all the loaded modules from the cache
     Object.keys(require.cache).forEach((key) => delete require.cache[key])
