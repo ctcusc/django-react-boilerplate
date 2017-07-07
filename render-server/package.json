@@ -1,0 +1,30 @@
+{
+  "name": "render-server",
+  "version": "0.0.1",
+  "description": "Lightweight node server to compile and render a React application",
+  "main": "main.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "gulp test"
+  },
+  "author": "Vinnie Magro <v@vinnie.io>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "browser-sync": "^2.18.12",
+    "connect-browser-sync": "^2.1.0",
+    "gulp": "^3.9.1",
+    "require-reload": "^0.2.2",
+    "webpack": "^3.1.0"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router": "^4.1.1"
+  }
+}
