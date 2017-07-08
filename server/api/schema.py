@@ -14,7 +14,7 @@ class Person(graphene.ObjectType):
     posts = graphene.List(lambda: Post)
 
     def resolve_friends(self, args, *_):
-        return PersonModel.objects.filter(owner__id=self.id)
+        return PersonModel.objects.filter(friends__id=self.id)
 
     def resolve_posts(self, args, *_):
         return PostModel.objects.filter(owner__id=self.id)
@@ -44,11 +44,15 @@ class Comment(graphene.ObjectType):
 class Query(graphene.ObjectType):
 
     persons = graphene.List(Person)
-    person = graphene.Field(Person)
+    person = graphene.Field(Person, id=graphene.ID())
 
     @resolve_only_args
     def resolve_persons(self):
         return PersonModel.objects.all()
+
+    @resolve_only_args
+    def resolve_person(self, id):
+        return PersonModel.objects.get(pk=id)
 
 
 class CreatePerson(graphene.Mutation):

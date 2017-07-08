@@ -1,9 +1,20 @@
 import React, {Component} from 'react'
+import { gql, graphql } from 'react-apollo'
 
-class IndexComponent extends Component {
-  render() {
-    return <div>Hello world!</div>
-  }
+function IndexComponent(props) {
+  return (
+    <div>
+      <ul></ul>
+      Hello world!
+    </div>
+  );
 }
 
-export default IndexComponent
+export default graphql(gql`
+  query IndexComponent {
+    persons {
+      id
+      name
+    }
+  }
+`)(IndexComponent);
