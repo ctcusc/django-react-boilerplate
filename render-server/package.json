@@ -4,7 +4,9 @@
   "description": "Lightweight node server to compile and render a React application",
   "main": "main.js",
   "scripts": {
-    "start": "node app.js",
+    "dev": "NODE_ENV=development node app.js",
+    "start": "NODE_ENV=development node app.js",
+    "prod": "NODE_ENV=production node app.js",
     "test": "gulp test"
   },
   "author": "Vinnie Magro <v@vinnie.io>",
@@ -24,6 +26,7 @@
     "express": "^4.15.3",
     "morgan": "^1.8.2",
     "react": "^15.6.1",
+    "react-apollo": "^1.4.3",
     "react-dom": "^15.6.1",
     "react-router": "^4.1.1"
   }

@@ -1,4 +1,7 @@
 import React from 'react'
+import {
+  ApolloClient, createNetworkInterface, ApolloProvider, getDataFromTree
+} from 'react-apollo';
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 
@@ -20,22 +23,47 @@ export default (req, res) => {
     Object.keys(require.cache).forEach((key) => delete require.cache[key])
     routes = require(routesPath).default;
   }
+  const client = new ApolloClient({
+    ssrMode: true,
+    // Remember that this is the interface the SSR server will use to connect to the
+    // API server, so we need to ensure it isn't firewalled, etc
+    networkInterface: createNetworkInterface({
+      uri: 'http://localhost:8000/graphql',
+      opts: {
+        credentials: 'same-origin',
+        headers: {
+          cookie: req.header('Cookie'),
+        },
+      },
+    }),
+  });
+
   const context = {}
-  const appHtml = renderToString(
-    <StaticRouter location={req.url} context={context}>
-      {routes}
-    </StaticRouter>
+  const app = (
+    <ApolloProvider client={client}>
+      <StaticRouter location={req.url} context={context}>
+        {routes}
+      </StaticRouter>
+    </ApolloProvider>
   );
 
-  if (context.url) {
-    // a React <Redirect> happened
-    res.redirect(301, context.url);
-  } else {
-    res.send(renderPage(appHtml));
-  }
+  getDataFromTree(app).then(() => {
+    const appHtml = renderToString(app);
+    const initialState = {[client.reduxRootKey]: client.getInitialState()};
+    
+    if (context.url) {
+      // a React <Redirect> happened
+      res.redirect(301, context.url);
+    } else {
+      res.send(renderPage(appHtml, initialState));
+    }
+  });
 }
 
-function renderPage(html) {
+function renderPage(html, state) {
+  if (state == null) {
+    state = {}
+  }
   return `
     <!DOCTYPE html>
       <head>
@@ -44,6 +72,9 @@ function renderPage(html) {
       </head>
       <body>
         <div id="app">${html}</div>
+        <script type="text/javascript">
+          window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};
+        </script>
         <script type="text/javascript" src="static/main.bundle.js"></script>
       </body>
     </html>
