@@ -5,6 +5,9 @@ import {
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 
+// this is necessary to make apollo work on the server
+import 'isomorphic-fetch'
+
 const isDev = process.env.NODE_ENV == 'development'
 const routesPath = '../client/routes';
 
