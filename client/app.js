@@ -6,7 +6,10 @@ import { createBrowserHistory } from 'history'
 
 import routes from './routes.js'
 
-const client = new ApolloClient({});
+const client = new ApolloClient({
+  initialState: window.__APOLLO_STATE__,
+  ssrForceFetchDelay: 100,
+});
 
 const history = createBrowserHistory();
 

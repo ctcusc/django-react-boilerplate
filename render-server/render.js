@@ -52,7 +52,9 @@ export default (req, res) => {
 
   getDataFromTree(app).then(() => {
     const appHtml = renderToString(app);
-    const initialState = {[client.reduxRootKey]: client.getInitialState()};
+    const initialState = {
+      apollo: client.getInitialState(),
+    };
     
     if (context.url) {
       // a React <Redirect> happened
