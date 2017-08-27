@@ -1,0 +1,28 @@
+engines:
+  fixme:
+    enabled: true
+  pep8:
+    enabled: true
+  eslint:
+    enabled: true
+    config:
+      config: client/.eslintrc.json
+  csslint:
+    enabled: true
+  scss-lint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python:
+      - javascript:
+ratings:
+  paths:
+  - "**.js"
+  - "**.py"
+  - "**.scss"
+  - "**.css"
+exclude_paths:
+- "**/vendor/**/*"
+- "**/migrations/**"
