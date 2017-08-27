@@ -1,0 +1,24 @@
+dist: trusty
+sudo: false
+language: python
+cache: pip
+python:
+  - "3.6"
+  - "3.7-dev"
+  - "nightly"
+install: "pip install -r server/requirements.txt"
+script: "cd server && pytest --cov=."
+
+env:
+  global:
+    # for CodeClimate
+    - CC_TEST_REPORTER_ID=638d8ef6aa5e4f3e88c8aba713517969b3ad513cfe3950570398a813b155f46a
+    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
+
+# codeclimate reporting
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
