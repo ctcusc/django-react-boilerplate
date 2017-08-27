@@ -1,3 +1,2 @@
 [flake8]
 exclude = docs/*, */migrations/* server/settings.py
-max-complexity = 16
