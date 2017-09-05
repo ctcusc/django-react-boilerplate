@@ -123,5 +123,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 GRAPHENE = {
-    'SCHEMA': 'api.schema.schema' # Where your Graphene schema lives
+    'SCHEMA': 'api.schema.schema'
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_METADATA_CLASS': 'api.metadata.GraphQLMetadata'
 }
