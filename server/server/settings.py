@@ -1,3 +1,4 @@
+# flake8: noqa
 """
 Django settings for server project.
 
@@ -31,9 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'graphql',
+    'social_network',
     'rest_framework',
-    'graphene_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,11 +121,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-GRAPHENE = {
-    'SCHEMA': 'api.schema.schema'
-}
-
-REST_FRAMEWORK = {
-    'DEFAULT_METADATA_CLASS': 'api.metadata.GraphQLMetadata'
-}
