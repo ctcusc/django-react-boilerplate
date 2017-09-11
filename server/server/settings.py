@@ -121,3 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    # set the default page size to 20, DRF will automatically make pagination fields in our JSON
+    # responses (count, next, previous, and results (where the original response is))
+    'PAGE_SIZE': 20,
+}
