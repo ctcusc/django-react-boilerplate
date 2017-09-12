@@ -9,20 +9,6 @@ from rest_framework import serializers
 from .models import Post, Profile
 
 
-class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    """Serializes user Profiles."""
-
-    class Meta:
-        """Model/fields for ModelSerializer."""
-
-        model = Profile
-        fields = ['id', 'url', 'username', 'posts']
-
-    # this is a Django backwards relation mapping Profile -> Posts, so it won't be included by
-    # default by the ModelSerializer, so we have to add it manually
-    posts = serializers.HyperlinkedRelatedField(many=True, view_name='post-detail', read_only=True)
-
-
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     """Serializes Posts.
 
@@ -38,9 +24,24 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'url', 'owner', 'owner_name', 'title', 'vote_count']
 
     vote_count = serializers.SerializerMethodField()
-    owner = serializers.HyperlinkedIdentityField(view_name='profile-detail')
+    owner = serializers.HyperlinkedRelatedField(view_name='profile-detail', read_only=True)
     owner_name = serializers.ReadOnlyField(source='owner.username')
 
     def get_vote_count(self, post):
         """Count how many votes the `Post` has received."""
         return post.vote_set.count()
+
+
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
+    """Serializes user Profiles."""
+
+    class Meta:
+        """Model/fields for ModelSerializer."""
+
+        model = Profile
+        fields = ['id', 'url', 'username', 'posts']
+
+    # this is a Django backwards relation mapping Profile -> Posts, so it won't be included by
+    # default by the ModelSerializer, so we have to add it manually
+    # Use the PostSerializer so that the Post objects will be fully instantiated
+    posts = PostSerializer(many=True, read_only=True)

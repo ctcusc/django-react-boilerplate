@@ -1,6 +1,6 @@
 """API views for social_network."""
 
-from rest_framework import generics
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -18,43 +18,19 @@ def api_root(request, format=None):
     })
 
 
-class ProfileList(generics.ListAPIView):
-    """List Profiles.
-
-    Using ListAPIView not ListCreateAPIView since we want this to be read-only.
-    """
+class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
+    """This provides get and list functionality for Profiles."""
 
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
 
-class ProfileDetail(generics.RetrieveAPIView):
-    """Get an individual Profile."""
-
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-
-
-class PostList(generics.ListCreateAPIView):
-    """List Posts, or create a new one.
-
-    This uses the DRF ListCreateAPIView for simplicity, since we are doing normal REST operations,
-    we can delegate all the work to DRF and our custom PostSerializer class for our specific
-    business logic in this case.
-    """
+class PostViewSet(viewsets.ModelViewSet):
+    """This provides r/w access to Posts."""
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    """Get/update/delete a single Post.
-
-    This also uses the convenience RetrieveUpdateDestroyAPIView from DRF.
-    Although the class contents are the same as PostList, it differs in the methods provided. In
-    this case, the REST operations we allow are GET, PUT and DELETE (the only logical operations
-    that can be performed on a single Post instance).
-    """
-
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+    def perform_create(self, serializer):
+        """Create a Post associated with the logged-in user."""
+        serializer.save(owner=self.request.user.profile)
