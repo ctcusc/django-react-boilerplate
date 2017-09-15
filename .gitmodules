@@ -1,3 +1,0 @@
-[submodule "client"]
-	path = client
-	url = https://github.com/alexander-lee/MERN-redux.git
