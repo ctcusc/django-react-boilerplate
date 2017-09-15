@@ -1,0 +1,46 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
+  "rules": {
+    "brace-style": ["error", "stroustrup"],
+    "comma-dangle": ["error", "always-multiline"],
+    "func-names": ["error", "as-needed"],
+    "max-len": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "no-plusplus": "off",
+    "no-restricted-syntax": "off",
+    "quote-props": ["error", "consistent"],
+    "arrow-parens": ["error", "always"],
+    "arrow-body-style": "off",
+    "react/prop-types": ["error", { "ignore": ["children", "className"] }],
+    "react/require-default-props": "off",
+    "react/jsx-no-target-blank": "error",
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js"] }],
+    "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
+    "import/no-mutable-exports": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": ["error", "never", { "scss": "always" }],
+    "import/no-absolute-path": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off"
+  }
+}
