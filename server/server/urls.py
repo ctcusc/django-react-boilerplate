@@ -18,8 +18,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from webpack_proxy.views import proxy
 
 urlpatterns = [
     url(r'^social/', include('social_network.urls')),
     url(r'^admin/', admin.site.urls),
+    # if we haven't matched a URL, proxy it through to webpack
+    url(r'', proxy),
 ]
