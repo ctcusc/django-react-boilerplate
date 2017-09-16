@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --hot",
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot",
     "test": "cross-env NODE_PATH=./client mocha --require babel-register --require ignore-styles --source-maps --reporter nyan \"./!(node_modules)/**/{*-test,*.spec}.js\"",
     "test-watch": "npm test -- --watch"
   },
