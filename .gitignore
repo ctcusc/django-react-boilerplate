@@ -1,4 +1,6 @@
 server/db.sqlite3
+tmp/
+logs/
 
 .DS_Store
 
