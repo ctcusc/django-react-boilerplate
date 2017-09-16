@@ -28,7 +28,7 @@ class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     """This provides r/w access to Posts."""
 
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-created')
     serializer_class = PostSerializer
 
     def perform_create(self, serializer):
