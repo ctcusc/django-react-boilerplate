@@ -10,7 +10,7 @@ const productionPlugins = [
 export default {
   devServer: {
     compress: true,
-    port: 3000,
+    port: 8002,
     historyApiFallback: true
   },
   entry: [
