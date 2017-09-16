@@ -26,7 +26,17 @@ export const readPosts = () => {
 
 export const votePostById = (postId, isUpvote) => {
   return async (dispatch) => {
-    const body = await fetcher.post(`/social/post/${postId}`);
+    let body;
+
+    if (isUpvote) {
+      body = await fetcher.post(`/social/posts/${postId}/vote`);
+    }
+    else {
+      body = await fetcher.delete(`/social/posts/${postId}/vote`);
+    }
+
+    console.log(body);
+
     dispatch(votePostByIdSucceeded({}))
   };
 }
