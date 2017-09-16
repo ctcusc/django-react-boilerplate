@@ -1,17 +1,16 @@
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
+import { push } from 'react-router-redux';
 
-import { history } from '../app/createStore';
-
-async function request(url, userOptions) {
+async function request(url, userOptions, dispatch) {
   const defaultOptions = {
-    // credentials: 'same-origin',
+    credentials: 'same-origin',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      // 'Content-Security-Policy': 'default-src \'self\'',
-      // 'X-Frame-Options': 'SAMEORIGIN',
-      // 'X-XSS-Protection': 1,
+      'Content-Security-Policy': 'default-src \'self\'',
+      'X-Frame-Options': 'SAMEORIGIN',
+      'X-XSS-Protection': 1,
     },
   };
 
@@ -26,7 +25,11 @@ async function request(url, userOptions) {
     const body = await response.json();
 
     if (body.redirectTo) {
-      history.push(body.redirectTo);
+      if (!dispatch) {
+        throw new Error('Dispatch not found!');
+      }
+
+      dispatch(push(body.redirectTo));
     }
 
     if (response.ok) {

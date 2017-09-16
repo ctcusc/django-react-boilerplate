@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import _ from 'lodash';
-import { readPostByIdSucceeded, readPostsSucceeded } from './actions';
+import * as actions from './actions';
 
 const defaultState = {
   byId: {},
@@ -23,8 +23,9 @@ const defaultState = {
   }
 }
 */
+
 export default handleActions({
-  [readPostByIdSucceeded]: (state, { payload }) => {
+  [actions.readPostByIdSucceeded]: (state, { payload }) => {
     const post = payload.post;
     return {
       ...state,
@@ -36,7 +37,7 @@ export default handleActions({
     };
   },
 
-  [readPostsSucceeded]: (state, { payload }) => {
+  [actions.readPostsSucceeded]: (state, { payload }) => {
     const posts = payload.posts;
     const byId = {};
     const allIds = [];

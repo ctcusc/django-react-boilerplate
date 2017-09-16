@@ -1,6 +1,7 @@
 'use strict';
 const webpack = require('webpack');
 const path = require('path');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const debug = process.env.NODE_ENV !== 'production';
 const productionPlugins = [
@@ -22,7 +23,7 @@ export default {
     publicPath: '/js/'
   },
   resolve: {
-    modules: ['client', 'node_modules']
+    modules: [process.env.PWD, 'node_modules']
   },
   cache: false,
   devtool: debug ? 'source-map' : null,
@@ -88,14 +89,23 @@ export default {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.LoaderOptionsPlugin({
       debug: debug
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      async: true,
+      minChunks: 2
     }),
+    new CircularDependencyPlugin({
+      exclude: 'node_modules',
+      failOnError: true
+    }),
+    new webpack.HotModuleReplacementPlugin(),
     ...!debug && productionPlugins
   ]
 }
