@@ -126,6 +126,11 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     # set the default page size to 20, DRF will automatically make pagination fields in our JSON
-    # responses (count, next, previous, and results (where the original response is))
+    # responses (next, previous, and results (where the original response is))
     'PAGE_SIZE': 20,
+    # Cursor based pagination is better because a client is guaranteed to only see each item once,
+    # even if the underlying dataset has items deleted or inserted
+    # This comes at the cost of the client not being able to arbitrarily index into a specific page,
+    # but still provides forward and backwards capability
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
 }
