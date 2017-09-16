@@ -39,7 +39,21 @@ class PostViewSet(viewsets.ModelViewSet):
     def vote(self, request, pk=None):
         """Vote on a post."""
         post = self.get_object()
+        # check if the vote already exists, if so don't allow the user to vote again
+        if Vote.objects.filter(profile=self.request.user.profile, post=post).exists():
+            # the user already voted, just return the post directly
+            data = PostSerializer(post, context={'request': self.request}).data
+            return Response(data)
+
         new_vote = Vote(profile=self.request.user.profile, post=post)
         new_vote.save()
+        data = PostSerializer(post, context={'request': self.request}).data
+        return Response(data)
+
+    @detail_route(methods=['DELETE'], url_path='vote')
+    def unvote(self, request, pk=None):
+        """Remove a Vote on a post."""
+        post = self.get_object()
+        Vote.objects.filter(profile=self.request.user.profile, post=post).delete()
         data = PostSerializer(post, context={'request': self.request}).data
         return Response(data)
