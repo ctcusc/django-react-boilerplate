@@ -9,7 +9,6 @@ export const votePostByIdSucceeded = createAction('VOTE_POST_BY_ID_SUCCEEDED');
 // Action Creators
 export const readPostById = (postId) => {
   return async (dispatch) => {
-    // TODO: REMOVE HOST
     const post = await fetcher.get(`/social/posts/${postId}`);
 
     dispatch(readPostByIdSucceeded({ post }));
@@ -18,10 +17,9 @@ export const readPostById = (postId) => {
 
 export const readPosts = () => {
   return async (dispatch) => {
-    // TODO: Remove host
     const body = await fetcher.get('/social/posts');
     const posts = body.results;
-
+    console.log(posts);
     dispatch(readPostsSucceeded({ posts }));
   };
 };
