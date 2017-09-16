@@ -1,0 +1,21 @@
+@import 'functions';
+@import 'variables';
+
+body {
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+  background-color: $white;
+}
+
+button {
+  border: 0;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

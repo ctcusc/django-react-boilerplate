@@ -1,0 +1,17 @@
+files:
+  include:
+    - 'client/**/*.s+(a|c)ss'
+  exclude:
+    - 'node_modules/**'
+options:
+  formatter: stylish
+rules:
+  class-name-format:
+    - 2
+    - convention: camelcase
+  force-pseudo-nesting: 0
+  hex-length: 0
+  no-color-literals:
+    - 2
+    - allow-rgba: true
+  property-sort-order: 0

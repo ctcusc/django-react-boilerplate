@@ -1,0 +1,45 @@
+@import '~styles/main';
+
+.post {
+  display: flex;
+  background-color: $light-blue;
+  border: 1px solid $blue;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 10px 10px 0;
+  width: 60%;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+
+  h1 {
+    font-size: px-em(24px);
+    margin: 0;
+  }
+}
+
+.voteContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  button {
+    background-color: transparent;
+    color: $light-gray;
+    transition: color 100ms ease-in-out;
+    font-size: px-em(18px);
+    font-weight: bold;
+  }
+
+  .upvote:hover {
+    color: $upvote-orange;
+  }
+
+  .downvote:hover {
+    color: $downvote-blue;
+  }
+}
