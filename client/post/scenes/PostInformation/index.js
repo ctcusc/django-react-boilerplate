@@ -8,7 +8,7 @@ import { readPostById } from '../../actions';
 export class PostInformation extends Component {
   static propTypes = {
     params: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
     }),
     post: PropTypes.shape({
       id: PropTypes.string,

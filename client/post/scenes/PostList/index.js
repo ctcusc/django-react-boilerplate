@@ -9,14 +9,14 @@ export class PostList extends Component {
   static propTypes = {
     posts: PropTypes.shape({
       byId: PropTypes.objectOf(PropTypes.shape({
-        id: PropTypes.string,
+        id: PropTypes.number,
         title: PropTypes.string,
         user: PropTypes.shape({
           username: PropTypes.string,
         }),
         votes: PropTypes.number,
       })),
-      allIds: PropTypes.arrayOf(PropTypes.string),
+      allIds: PropTypes.arrayOf(PropTypes.number),
     }),
     readPosts: PropTypes.func,
   }

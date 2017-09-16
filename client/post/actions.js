@@ -19,7 +19,7 @@ export const readPosts = () => {
   return async (dispatch) => {
     const body = await fetcher.get('/social/posts');
     const posts = body.results;
-    console.log(posts);
+
     dispatch(readPostsSucceeded({ posts }));
   };
 };

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import s from './styles.scss';
 
 const propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number,
   title: PropTypes.string,
   user: PropTypes.string,
   votes: PropTypes.number,
