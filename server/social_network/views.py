@@ -26,7 +26,17 @@ class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    """This provides r/w access to Posts."""
+    """Get or create Posts.
+
+    retrieve:
+    Return a post given its ID.
+
+    list:
+    Get a paginated list of all Posts.
+
+    create:
+    Create a new Post as the logged-in user.
+    """
 
     queryset = Post.objects.all().order_by('-created')
     serializer_class = PostSerializer
