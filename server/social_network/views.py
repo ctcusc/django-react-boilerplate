@@ -1,11 +1,11 @@
 """API views for social_network."""
 
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, detail_route
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from .models import Profile, Post
+from .models import Profile, Post, Vote
 from .serializers import ProfileSerializer, PostSerializer
 
 
@@ -34,3 +34,12 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Create a Post associated with the logged-in user."""
         serializer.save(owner=self.request.user.profile)
+
+    @detail_route(methods=['POST'], url_path='vote')
+    def vote(self, request, pk=None):
+        """Vote on a post."""
+        post = self.get_object()
+        new_vote = Vote(profile=self.request.user.profile, post=post)
+        new_vote.save()
+        data = PostSerializer(post, context={'request': self.request}).data
+        return Response(data)
