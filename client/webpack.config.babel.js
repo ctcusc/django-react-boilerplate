@@ -14,7 +14,7 @@ export default {
     historyApiFallback: true
   },
   entry: [
-    path.join(__dirname, 'client', 'app', 'index.js')
+    path.join(__dirname, 'app', 'index.js')
   ],
   output: {
     path: path.join(__dirname, 'static', 'js'),
