@@ -17,9 +17,13 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 
 urlpatterns = [
-    url(r'^social/', include('social_network.urls')),
+    url(r'^api/', include('social_network.urls')),
+    # redirect /api to /api/ so that the browsable api works
+    url(r'^api$', RedirectView.as_view(url='api/')),
+
     url(r'^admin/', admin.site.urls),
 ]
