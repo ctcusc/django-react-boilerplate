@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Post from '../../components/Post';
-import { readPosts } from '../../actions';
+import { readPosts, votePostById } from '../../actions';
 
 export class PostList extends Component {
   static propTypes = {
@@ -19,6 +19,7 @@ export class PostList extends Component {
       allIds: PropTypes.arrayOf(PropTypes.number),
     }),
     readPosts: PropTypes.func,
+    votePostById: PropTypes.func,
   }
 
   /*
@@ -31,7 +32,7 @@ export class PostList extends Component {
   }
 
   votePost = (id, isUpvote) => {
-
+    this.props.votePostById(id, isUpvote);
   }
 
   render() {
@@ -79,6 +80,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     readPosts: () => dispatch(readPosts()),
+    votePostById: (postId, isUpvote) => dispatch(votePostById(postId, isUpvote)),
   };
 }
 
