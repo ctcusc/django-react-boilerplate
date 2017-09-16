@@ -9,7 +9,7 @@ export const votePostByIdSucceeded = createAction('VOTE_POST_BY_ID_SUCCEEDED');
 // Action Creators
 export const readPostById = (postId) => {
   return async (dispatch) => {
-    const post = await fetcher.get(`/social/posts/${postId}`);
+    const post = await fetcher.get(`/api/posts/${postId}`);
 
     dispatch(readPostByIdSucceeded({ post }));
   };
