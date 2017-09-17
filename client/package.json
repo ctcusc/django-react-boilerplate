@@ -31,6 +31,7 @@
     "ejs": "~2.3.3",
     "express": "~4.13.1",
     "file-loader": "^0.11.2",
+    "js-cookie": "^2.1.4",
     "json-loader": "^0.5.4",
     "lodash": "^4.17.4",
     "morgan": "~1.6.1",

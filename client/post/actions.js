@@ -35,8 +35,6 @@ export const votePostById = (postId, isUpvote) => {
       body = await fetcher.delete(`/api/posts/${postId}/vote`);
     }
 
-    console.log(body);
-
-    dispatch(votePostByIdSucceeded({}))
+    dispatch(votePostByIdSucceeded({ post: body }));
   };
-}
+};

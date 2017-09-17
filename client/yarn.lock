@@ -4519,6 +4519,10 @@ js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.3.1"
   resolved "https://registry.npmjs.org/js-base64/-/js-base64-2.3.1.tgz#3705897c35fce0e202132630e750d8a17cd220ec"
 
+js-cookie@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.npmjs.org/js-cookie/-/js-cookie-2.1.4.tgz#da4ec503866f149d164cf25f579ef31015025d8d"
+
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
