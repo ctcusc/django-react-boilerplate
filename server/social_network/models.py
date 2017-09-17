@@ -12,6 +12,7 @@ class Profile(models.Model):
     """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
     username = models.CharField(max_length=200)
     picture_url = models.URLField()
 

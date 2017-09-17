@@ -21,7 +21,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         """Model/fields for ModelSerializer."""
 
         model = Post
-        fields = ['id', 'url', 'owner', 'owner_name', 'title', 'vote_count']
+        fields = ['id', 'url', 'created', 'owner', 'owner_name', 'title', 'vote_count']
 
     vote_count = serializers.SerializerMethodField()
     owner = serializers.HyperlinkedRelatedField(view_name='profile-detail', read_only=True)

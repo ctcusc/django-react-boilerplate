@@ -2,6 +2,9 @@ import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import { push } from 'react-router-redux';
 
+// grab the CSRF token from the cookie
+const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*=s*([^;]*).*$)|^.*$/, '$1');
+
 async function request(url, userOptions, dispatch) {
   const defaultOptions = {
     credentials: 'same-origin',
@@ -11,6 +14,7 @@ async function request(url, userOptions, dispatch) {
       'Content-Security-Policy': 'default-src \'self\'',
       'X-Frame-Options': 'SAMEORIGIN',
       'X-XSS-Protection': 1,
+      'X-CSRFToken': csrfToken,
     },
   };
 

@@ -6,7 +6,7 @@ from rest_framework.schemas import get_schema_view
 
 from . import views
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register(r'profiles', views.ProfileViewSet)
 router.register(r'posts', views.PostViewSet)
 

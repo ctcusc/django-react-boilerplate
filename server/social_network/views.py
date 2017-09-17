@@ -26,34 +26,40 @@ class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    """This provides r/w access to Posts."""
+    """Get or create Posts.
 
-    queryset = Post.objects.all()
+    retrieve:
+    Return a post given its ID.
+
+    list:
+    Get a paginated list of all Posts.
+
+    create:
+    Create a new Post as the logged-in user.
+    """
+
+    queryset = Post.objects.all().order_by('-created')
     serializer_class = PostSerializer
 
     def perform_create(self, serializer):
         """Create a Post associated with the logged-in user."""
         serializer.save(owner=self.request.user.profile)
 
-    @detail_route(methods=['POST'], url_path='vote')
+    @detail_route(methods=['POST', 'DELETE'], url_path='vote')
     def vote(self, request, pk=None):
-        """Vote on a post."""
+        """Vote or unvote on a post."""
         post = self.get_object()
-        # check if the vote already exists, if so don't allow the user to vote again
-        if Vote.objects.filter(profile=self.request.user.profile, post=post).exists():
-            # the user already voted, just return the post directly
-            data = PostSerializer(post, context={'request': self.request}).data
-            return Response(data)
+        if request.method == 'POST':
+            # check if the vote already exists, if so don't allow the user to vote again
+            if Vote.objects.filter(profile=self.request.user.profile, post=post).exists():
+                # the user already voted, just return the post directly
+                data = PostSerializer(post, context={'request': self.request}).data
+                return Response(data)
+            new_vote = Vote(profile=self.request.user.profile, post=post)
+            new_vote.save()
 
-        new_vote = Vote(profile=self.request.user.profile, post=post)
-        new_vote.save()
-        data = PostSerializer(post, context={'request': self.request}).data
-        return Response(data)
+        elif request.method == 'DELETE':
+            Vote.objects.filter(profile=self.request.user.profile, post=post).delete()
 
-    @detail_route(methods=['DELETE'], url_path='vote')
-    def unvote(self, request, pk=None):
-        """Remove a Vote on a post."""
-        post = self.get_object()
-        Vote.objects.filter(profile=self.request.user.profile, post=post).delete()
         data = PostSerializer(post, context={'request': self.request}).data
         return Response(data)
