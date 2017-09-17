@@ -29,10 +29,10 @@ export const votePostById = (postId, isUpvote) => {
     let body;
 
     if (isUpvote) {
-      body = await fetcher.post(`/social/posts/${postId}/vote`);
+      body = await fetcher.post(`/social/posts/${postId}/vote/`);
     }
     else {
-      body = await fetcher.delete(`/social/posts/${postId}/vote`);
+      body = await fetcher.delete(`/social/posts/${postId}/vote/`);
     }
 
     console.log(body);
