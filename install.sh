@@ -12,6 +12,7 @@ brew install nginx python3 yarn
 # NOTE: `brew uninstall node` if you already have it installed
 
 if !(brew ls --versions nvm > /dev/null); then
+  echo "nvm not installed"
   brew install nvm
   echo '' >> $PROFILE
   echo 'export NVM_DIR="$HOME/.nvm"' >> $PROFILE
@@ -23,7 +24,12 @@ nvm install lts/*
 nvm alias default lts/*
 
 # ============= INSTALL SUPERVISOR ============= #
-brew install python
+
+# Install python2 if it doesn't exist
+if !(hash python 2>/dev/null); then
+  brew install python
+fi
+
 if hash pip 2>/dev/null
 then
   echo "pip already installed!"
