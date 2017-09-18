@@ -10,10 +10,13 @@ brew install nginx python3 yarn
 
 # ============= INSTALL NVM AND NODE ============= #
 # NOTE: `brew uninstall node` if you already have it installed
-brew install nvm
-echo '' >> $PROFILE
-echo 'export NVM_DIR="$HOME/.nvm"' >> $PROFILE
-echo '. "$(brew --prefix nvm)/nvm.sh"' >> $PROFILE
+
+if !(brew ls --versions nvm > /dev/null); then
+  brew install nvm
+  echo '' >> $PROFILE
+  echo 'export NVM_DIR="$HOME/.nvm"' >> $PROFILE
+  echo '. "$(brew --prefix nvm)/nvm.sh"' >> $PROFILE
+fi
 
 source $PROFILE
 nvm install lts/*
@@ -25,13 +28,13 @@ if hash pip 2>/dev/null
 then
   echo "pip already installed!"
 else
-  sudo easy_install pip
+  easy_install pip
 fi
 if supervisord --version | grep 3.3.3 >/dev/null 2>&1
 then
-echo supervisord 3.3.3 already installed
+  echo supervisord 3.3.3 already installed
 else
-sudo pip install supervisor
+  pip install supervisor
 fi
 
 # ============= SETUP SERVER ============= #
