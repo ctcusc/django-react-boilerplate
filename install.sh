@@ -2,9 +2,13 @@
 
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
   PROFILE="$HOME/.zsh_profile"
+  RC="$HOME/.zshrc"
 elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
   PROFILE="$HOME/.bash_profile"
+  RC="$HOME/.bashrc"
 fi
+
+echo 'source $PROFILE' >> $RC
 
 brew install nginx python3 yarn
 
@@ -35,7 +39,9 @@ then
   echo "pip already installed!"
 else
   easy_install pip
+  pip install venv
 fi
+
 if supervisord --version | grep 3.3.3 >/dev/null 2>&1
 then
   echo supervisord 3.3.3 already installed
