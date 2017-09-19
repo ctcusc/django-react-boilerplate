@@ -42,7 +42,6 @@ If you want to see the full logs of a process, go to `/logs/` and look for the l
 **Make sure that you are in /server if you need to run ./start.sh, the server-start script.**
 
 
-
 - We will be building out our backend RESTful API using Django, a Python web framework
   - The link below will take you to the Django documentation for running commands in the terminal
   - [Django CLI Commands](https://docs.djangoproject.com/en/1.11/ref/django-admin/)
@@ -54,10 +53,20 @@ If you want to see the full logs of a process, go to `/logs/` and look for the l
   - Serializers to convert instances of these models to JSON are located under `/server/social_network/serializers.py`
 
 ## Frontend
+**Dependency Management**
 - We are using Yarn, Facebook's proprietary package managing tool. We are using it in place of NPM because it has better support for versionining and dependency control.
-- DO NOT NPM INSTALL!!!
+- **DO NOT NPM INSTALL!**
 - `yarn install`: installs all dependencies in the `package.json` file
 - `yarn add <package-name>`: installs the given package and adds it to the yarn.lock file
 - `yarn list`: lists all of the installed packages
 - `yarn remove <package-name>`: removes the package from your node_modules and also your yarn.lock file.
 - Documentation: (https://yarnpkg.com/en/docs/cli/)
+
+**Folder Structure**
+- All of our frontend files are located in the `/client` folder. This folder also contains the lockfiles and package.json, so perform all installs in this directory.
+- We will be using **css modules** for our styling. All styles should be kept under the `/styles` folder.
+- Each 'domain' has its own folder.
+    - Dumb components live in `components/<domain-name>`
+    - Smart components live in `scenes/<domain-name>`
+    - Reducers, reducer tests, and actions live in the top-level domain section.
+    
