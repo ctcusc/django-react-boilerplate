@@ -52,7 +52,8 @@ export default {
           {
             loader: 'css-loader',
             options: {
-              modules: true
+              modules: true,
+              localIdentName: debug ? '[local]__[hash:base64:5]' : '[hash:base64:5]'
             }
           },
           {
