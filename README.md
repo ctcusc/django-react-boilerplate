@@ -15,6 +15,8 @@
 
 1. See the server live on `localhost:8000`
 
+1. Run `tail -f django` to see the Django logs or `tail -f webpack` to see the Webpack logs
+
 ## Using Supervisord
 Supervisord allows us to run and "supervise" multiple processes at the same time. This is essential as we need to run both a Django and Webpack (Frontend) server, along with nginx to proxy them.
 
