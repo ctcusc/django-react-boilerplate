@@ -62,7 +62,7 @@ We are using Yarn, Facebook's proprietary package managing tool. We are using it
 - `yarn add <package-name>`: installs the given package and adds it to the yarn.lock file
 - `yarn list`: lists all of the installed packages
 - `yarn remove <package-name>`: removes the package from your node_modules and also your yarn.lock file.
-- Documentation: (https://yarnpkg.com/en/docs/cli/)
+- Documentation: https://yarnpkg.com/en/docs/cli/
 
 ### Folder Structure
 All of our frontend files are located in the `/client` folder. This folder also contains the yarn.lock file and package.json, so perform all node package management in this directory.
