@@ -26,12 +26,19 @@ Supervisord allows us to run and "supervise" multiple processes at the same time
 You can run the following commands on current processes:
 
 `status` will list the status of all the processes (State, Running Time, Process ID)
+
 `start <name or all>` will start a given process (or all if you type `all`)
+
 `stop <name or all>` will stop a given process (or all)
+
 `restart <name or all>` will restart a given process
+
 `shutdown` will shutdown the entire supervisord process **YOU NEED TO DO THIS TO QUIT THE SERVER**
+
 `tail -f <name>` will show you the live logs of a given process
+
 `tail -100 <name>` will show you the last 100 bytes of a given process (100 can be any number)
+
 
 If you want to see the full logs of a process, go to `/logs/` and look for the log of the process you want to examine.
 
