@@ -49,7 +49,15 @@ If you want to see the full logs of a process, go to `/logs/` and look for the l
 
 - Top-level routes are located under `/server/server/urls.py` and `/server/server/views.py`
 - The routes that you will be working with are located under `/server/social_network/urls.py` and `/server/social_network/views.py`
-
 - Database models are located under `/server/social_network/models.py`
   - Currently limited to Profiles, Posts, and Votes
   - Serializers to convert instances of these models to JSON are located under `/server/social_network/serializers.py`
+
+## Frontend
+- We are using Yarn, Facebook's proprietary package managing tool. We are using it in place of NPM because it has better support for versionining and dependency control.
+- DO NOT NPM INSTALL!!!
+- `yarn install`: installs all dependencies in the `package.json` file
+- `yarn add <package-name>`: installs the given package and adds it to the yarn.lock file
+- `yarn list`: lists all of the installed packages
+- `yarn remove <package-name>`: removes the package from your node_modules and also your yarn.lock file.
+- Documentation: (https://yarnpkg.com/en/docs/cli/)
