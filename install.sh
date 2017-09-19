@@ -2,13 +2,9 @@
 
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
   PROFILE="$HOME/.zsh_profile"
-  RC="$HOME/.zshrc"
 elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
   PROFILE="$HOME/.bash_profile"
-  RC="$HOME/.bashrc"
 fi
-
-echo 'source $PROFILE' >> $RC
 
 brew install nginx python3 yarn
 
@@ -26,6 +22,7 @@ fi
 source $PROFILE
 nvm install lts/*
 nvm alias default lts/*
+nvm use lts/*
 
 # ============= INSTALL SUPERVISOR ============= #
 
@@ -39,7 +36,6 @@ then
   echo "pip already installed!"
 else
   easy_install pip
-  pip install venv
 fi
 
 if supervisord --version | grep 3.3.3 >/dev/null 2>&1
@@ -53,11 +49,8 @@ fi
 # setup server
 pushd server/
 
-# create a virtualenv and install the packages
-virtualenv -p python3 venv
-source venv/bin/activate
-pip install -r requirements.txt
-deactivate
+pip install pipenv
+pipenv install -r requirements.txt
 
 popd
 # end server

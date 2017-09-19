@@ -1,0 +1,43 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+
+certifi = "==2017.7.27.1"
+chardet = "==3.0.4"
+coreapi = "==2.3.1"
+coreschema = "==0.0.4"
+coverage = "==4.4.1"
+Django = "==1.11.3"
+django-filter = "==1.0.4"
+djangorestframework = "==3.6.4"
+flake8 = "==3.4.1"
+flake8-docstrings = "==1.1.0"
+flake8-polyfill = "==1.0.1"
+idna = "==2.6"
+iso8601 = "==0.1.11"
+itypes = "==1.1.0"
+Jinja2 = "==2.9.6"
+Markdown = "==2.6.9"
+MarkupSafe = "==1.0"
+mccabe = "==0.6.1"
+promise = "==2.0.2"
+py = "==1.4.34"
+pycodestyle = "==2.3.1"
+pydocstyle = "==2.0.0"
+pyflakes = "==1.5.0"
+pytest = "==3.2.1"
+pytest-cov = "==2.5.1"
+pytest-django = "==3.1.2"
+pytz = "==2017.2"
+requests = "==2.18.4"
+singledispatch = "==3.4.0.3"
+snowballstemmer = "==1.2.1"
+termcolor = "==1.1.0"
+typing = "==3.6.1"
+uritemplate = "==3.0.0"
+urllib3 = "==1.22"
+
