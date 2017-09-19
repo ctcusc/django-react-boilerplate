@@ -49,8 +49,8 @@ fi
 # setup server
 pushd server/
 
-pip install pipenv
-pipenv install -r requirements.txt
+pip3 install pipenv
+pipenv --three install -r requirements.txt
 
 popd
 # end server
