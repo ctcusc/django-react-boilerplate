@@ -50,7 +50,7 @@ fi
 pushd server/
 
 pip3 install pipenv
-pipenv --three install -r requirements.txt
+pipenv --python 3.6 install -r requirements.txt
 
 popd
 # end server

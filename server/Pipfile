@@ -41,3 +41,6 @@ typing = "==3.6.1"
 uritemplate = "==3.0.0"
 urllib3 = "==1.22"
 
+
+[requires]
+python_version = "3.6"
