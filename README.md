@@ -53,20 +53,24 @@ If you want to see the full logs of a process, go to `/logs/` and look for the l
   - Serializers to convert instances of these models to JSON are located under `/server/social_network/serializers.py`
 
 ## Frontend
-**Dependency Management**
-- We are using Yarn, Facebook's proprietary package managing tool. We are using it in place of NPM because it has better support for versionining and dependency control.
-- **DO NOT NPM INSTALL!**
+### Dependency Management
+We are using Yarn, Facebook's proprietary package managing tool. We are using it in place of NPM because it has better support for versionining and dependency control.
+
+**NOTE: DO NOT RUN npm install**
+
 - `yarn install`: installs all dependencies in the `package.json` file
 - `yarn add <package-name>`: installs the given package and adds it to the yarn.lock file
 - `yarn list`: lists all of the installed packages
 - `yarn remove <package-name>`: removes the package from your node_modules and also your yarn.lock file.
 - Documentation: (https://yarnpkg.com/en/docs/cli/)
 
-**Folder Structure**
-- All of our frontend files are located in the `/client` folder. This folder also contains the lockfiles and package.json, so perform all installs in this directory.
-- We will be using **css modules** for our styling. All styles should be kept under the `/styles` folder.
-- Each 'domain' has its own folder.
-    - Dumb components live in `components/<domain-name>`
-    - Smart components live in `scenes/<domain-name>`
-    - Reducers, reducer tests, and actions live in the top-level domain section.
+### Folder Structure
+All of our frontend files are located in the `/client` folder. This folder also contains the yarn.lock file and package.json, so perform all node package management in this directory.
+
+We will be using **CSS modules** for our styling. All **GLOBAL** styles should be kept under the `/styles` folder.
+
+Our app is separated into "domains" with the following folder structure: 
+    - Dumb Components live in `<domain-name>/components`
+    - Smart Containers live in `<domain-name>/scenes`
+    - Reducers & Actions live in `<domain-name>/`
     
