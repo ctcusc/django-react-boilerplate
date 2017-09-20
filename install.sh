@@ -15,8 +15,14 @@ if !(brew ls --versions nvm > /dev/null); then
   echo "nvm not installed"
   brew install nvm
   echo '' >> $PROFILE
-  echo 'export NVM_DIR="$HOME/.nvm"' >> $PROFILE
-  echo '. "$(brew --prefix nvm)/nvm.sh"' >> $PROFILE
+  echo 'export NVM_DIR=~/.nvm' >> $PROFILE
+  echo 'function nvm {' >> $PROFILE
+  echo '  if [ -s "$NVM_DIR/nvm.sh" ]; then' >> $PROFILE
+  echo '    . "$NVM_DIR/nvm.sh"' >> $PROFILE
+  echo '    nvm use system' >> $PROFILE
+  echo '    nvm $@' >> $PROFILE
+  echo '  fi' >> $PROFILE
+  echo '}' >> $PROFILE
 fi
 
 source $PROFILE
