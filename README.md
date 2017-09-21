@@ -9,9 +9,9 @@
 1. Clone this repository
 `git clone git@github.com:ctcusc/django-react-boilerplate.git`
 
-1. `cd` into the folder and run `install.sh`
+1. `cd` into the folder and run `./install.sh`
 
-1. Start the server with `start.sh`
+1. Start the server with `./start.sh`
 
 1. See the server live on `localhost:8000`
 
