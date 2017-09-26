@@ -1,5 +1,3 @@
-import { handleActions, combineActions } from 'redux-actions';
-import _ from 'lodash';
 import { readPostByIdSucceeded, readPostsSucceeded, votePostByIdSucceeded } from './actions';
 
 const defaultState = {
@@ -24,33 +22,8 @@ const defaultState = {
 }
 */
 
-export default handleActions({
-  [combineActions(readPostByIdSucceeded, votePostByIdSucceeded)]: (state, { payload }) => {
-    const post = payload.post;
-    return {
-      ...state,
-      byId: {
-        ...state.byId,
-        [post.id]: post,
-      },
-      allIds: _.union(state.allIds, [post.id]),
-    };
-  },
+function (state = defaultState, action) {
+  switch (action.type) {
 
-  [readPostsSucceeded]: (state, { payload }) => {
-    const posts = payload.posts;
-    const byId = {};
-    const allIds = [];
-
-    posts.forEach((post) => {
-      byId[post.id] = post;
-      allIds.push(post.id);
-    });
-
-    return {
-      ...state,
-      byId,
-      allIds,
-    };
-  },
-}, defaultState);
+  }
+}
