@@ -70,7 +70,8 @@ All of our frontend files are located in the `/client` folder. This folder also 
 We will be using **CSS modules** for our styling. All **GLOBAL** styles should be kept under the `/styles` folder.
 
 Our app is separated into "domains" with the following folder structure: 
-    - Dumb Components live in `<domain-name>/components`
-    - Smart Containers live in `<domain-name>/scenes`
-    - Reducers & Actions live in `<domain-name>/`
+
+- Dumb Components live in `<domain-name>/components`
+- Smart Containers live in `<domain-name>/scenes`
+- Reducers & Actions live in `<domain-name>/`
     
