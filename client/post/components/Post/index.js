@@ -9,7 +9,6 @@ class Post extends React.Component {
   // State
   state = {
     votes: 0,
-    test: 1,
   };
 
   onUpvote() {
@@ -17,11 +16,17 @@ class Post extends React.Component {
       votes: this.state.votes + 1,
     });
   }
+  onDownvote = () => {
+    this.setState({
+      votes: this.state.votes - 1,
+    });
+  }
   // Render
   render() {
     return (
       <div>
-        <button onClick={this.onUpvote}>^</button>
+        <button onClick={this.onUpvote.bind(this)}>^</button>
+        <button onClick={this.onDownvote}>v</button>
         <div>{this.state.votes}</div>
         <h1>{this.props.title}</h1>
       </div>
