@@ -7,19 +7,15 @@ import { readPosts, votePostById } from '../../actions';
 
 export class PostList extends Component {
   static propTypes = {
-    posts: PropTypes.shape({
-      byId: PropTypes.objectOf(PropTypes.shape({
-        id: PropTypes.number,
-        title: PropTypes.string,
-        user: PropTypes.shape({
-          username: PropTypes.string,
-        }),
-        votes: PropTypes.number,
-      })),
-      allIds: PropTypes.arrayOf(PropTypes.number),
-    }),
-    readPosts: PropTypes.func,
-    votePostById: PropTypes.func,
+    posts: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      user: PropTypes.shape({
+        username: PropTypes.string,
+      }),
+      votes: PropTypes.number,
+    })),
+    dispatch: PropTypes.func,
   }
 
   /*
@@ -28,11 +24,11 @@ export class PostList extends Component {
     it with data
   */
   componentDidMount() {
-    this.props.readPosts();
+    this.props.dispatch(readPosts());
   }
 
   votePost = (id, isUpvote) => {
-    this.props.votePostById(id, isUpvote);
+    this.props.dispatch(votePostById(id, isUpvote));
   }
 
   render() {
@@ -40,12 +36,11 @@ export class PostList extends Component {
       Object destructuring. This is equivalent to: const posts = this.props.posts;
     */
     const { posts } = this.props;
-    const postList = posts.allIds.map((id) => posts.byId[id]);
 
     return (
       <div>
         <h1>Posts</h1>
-        { postList.map((p) => (
+        { posts.map((p) => (
           <Post
             key={`post-${p.id}`}
             id={p.id}
@@ -66,6 +61,8 @@ export class PostList extends Component {
 
       For example, if we had Post1 and Post2, we need the upvote and downvote functions to only apply to their specific posts.
       Any function of the signature () => ... automatically binds 'this' to its parent context.
+      We also need to wrap these functions in arrows because we want to call votePost with parameters.
+        - To avoid calling it on each render(), we wrap it
     */
   }
 }
@@ -77,11 +74,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    readPosts: () => dispatch(readPosts()),
-    votePostById: (postId, isUpvote) => dispatch(votePostById(postId, isUpvote)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(mapStateToProps)(PostList);
