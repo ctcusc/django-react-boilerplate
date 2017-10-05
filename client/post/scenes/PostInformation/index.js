@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
 import { readPostById } from '../../actions';
 
@@ -18,14 +17,14 @@ export class PostInformation extends Component {
       }),
       votes: PropTypes.number,
     }),
-    readPostById: PropTypes.func,
+    dispatch: PropTypes.func,
   }
 
   /*
     Load the data before the actual component is rendered.
   */
   componentDidMount() {
-    this.props.readPostById(this.props.params.id);
+    this.props.dispatch(readPostById(this.props.params.id));
   }
 
   render() {
@@ -59,35 +58,22 @@ export class PostInformation extends Component {
   Here, this.props.post will be populated with 'posts[ownProps.params.id]'.
 */
 function mapStateToProps(state, ownProps) {
-  const posts = _.get(state, 'post.byId');
-  /*
-    Here, we're using Lodash's get function to retrieve state.post.byId.
-    We use this to guard against undefined. Since we're reaching two levels deep in the
-    object, we want to be sure that state.post is defined before we try to reach state.post.byId.
-    If post === undefined or null, then an error is thrown.
-  */
+  const posts = state.post || [];
+
+  let post;
+
+  posts.forEach((p) => {
+    if (p.id.toString() === ownProps.params.id) {
+      post = p;
+    }
+  });
+
   return {
-    post: posts[ownProps.params.id],
+    post,
   };
 }
 
 /*
-  mapDispatchToProps is an OPTIONAL secondary parameter passed into connect(). It essentially injects
-  functions into 'this.props' that make dispatching Redux actions much easier. In this case, if we call
-  this.props.readPostById(postId), we will actually dispatch the 'readPostById' action with the parameter
-  postId. This is convenient because otherwise, we would have to manually write:
-    this.props.dispatch(readPostById(postId))
-    versus:
-    this.props.readPostById(postId).
-  Although this may not seem like much of an improvement, it is important if we want to modify some of the parameters
-  being passed into our function before we dispatch our action. Think of it as a layer of abstraction.
-*/
-function mapDispatchToProps(dispatch) {
-  return {
-    readPostById: (postId) => dispatch(readPostById(postId)),
-  };
-}
-/*
   We're not exporting PostInformation, but rather a "connected" version of the component.
 */
-export default connect(mapStateToProps, mapDispatchToProps)(PostInformation);
+export default connect(mapStateToProps)(PostInformation);

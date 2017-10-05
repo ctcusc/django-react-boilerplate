@@ -27,7 +27,7 @@ export default function (state = defaultState, action) {
     case readPostByIdSucceeded:
     case votePostByIdSucceeded:
       const newPost = payload.post;
-      const currentPosts = state.posts;
+      const currentPosts = state;
       const updatedPosts = [newPost];
 
       currentPosts.forEach((post) => {
