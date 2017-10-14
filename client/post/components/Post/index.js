@@ -1,37 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import s from './styles.scss';
 
-class Post extends React.Component {
-  // PropTypes
-  static propTypes = {
-    title: PropTypes.string,
-  };
-  // State
-  state = {
-    votes: 0,
-  };
+const propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  user: PropTypes.string,
+  votes: PropTypes.number,
+  upvotePost: PropTypes.func,
+  downvotePost: PropTypes.func,
+};
 
-  onUpvote() {
-    this.setState({
-      votes: this.state.votes + 1,
-    });
-  }
-  onDownvote = () => {
-    this.setState({
-      votes: this.state.votes - 1,
-    });
-  }
-  // Render
-  render() {
-    return (
-      <div>
-        <button onClick={this.onUpvote.bind(this)}>^</button>
-        <button onClick={this.onDownvote}>v</button>
-        <div>{this.state.votes}</div>
-        <h1>{this.props.title}</h1>
+function Post({ id, title, user, votes, upvotePost, downvotePost }) {
+  return (
+    <div className={s.post}>
+      <div className={s.voteContainer}>
+        <button className={s.upvote} onClick={upvotePost}>⬆</button>
+        <div>{votes}</div>
+        <button className={s.downvote} onClick={downvotePost}>⬇</button>
       </div>
-    );
-  }
+      <Link to={`/post/${id}`} className={s.informationContainer}>
+        <h1>{title}</h1>
+        <span>by {user}</span>
+      </Link>
+    </div>
+  );
 }
 
+/*
+  Since we're making a functional stateless component, we can't actually write:
+  static propTypes = {
+    ...
+  };
+  We have to manually set it outside the function.
+*/
+
+Post.propTypes = propTypes;
 export default Post;

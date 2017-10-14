@@ -3,4 +3,7 @@ import { routerReducer as routing } from 'react-router-redux';
 
 import post from 'post/reducer';
 
-export default combineReducers({ post, routing });
+export default combineReducers({
+  post: post,
+  routing: routing
+});
